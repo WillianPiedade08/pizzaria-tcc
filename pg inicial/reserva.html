@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Reserva</title>
+  <link rel="stylesheet" href="reserva.css">
+</head>
+
+<body>
+  <div class="reserva-container">
+    <h2>Faça sua Reserva</h2>
+    <form id="reservaForm">
+      <label for="nome">Nome completo</label>
+      <input type="text" id="nome" name="nome" required>
+
+      <label for="email">E-mail</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="data">Data da reserva</label>
+      <input type="date" id="data" name="data" required>
+
+      <label for="hora">Horário</label>
+      <input type="time" id="hora" name="hora" required>
+
+      <label for="pessoas">Número de pessoas</label>
+      <select id="pessoas" name="pessoas" required>
+        <option value="">Selecione</option>
+        <option value="1">1 pessoa</option>
+        <option value="2">2 pessoas</option>
+        <option value="3">3 pessoas</option>
+        <option value="4">4 pessoas</option>
+        <option value="5+">5 ou mais</option>
+      </select>
+
+      <label for="mensagem">Mensagem adicional</label>
+      <textarea id="mensagem" name="mensagem" rows="4"></textarea>
+
+      <button type="submit">Reservar Agora</button>
+    </form>
+
+  </div>
+
+  
+  <div id="overlayMensagem" class="overlay hidden">
+    <div id="mensagemSucesso" class="mensagem-sucesso">
+      <div class="mensagem-titulo">
+        <span class="check-icon">✅</span> Mesa reservada na pizzaria às 19h! 🎉
+      </div>
+      <div class="mensagem-detalhes">
+        Dia: <span id="dataReserva"></span><br>
+        Horário: <span id="horaReserva"></span><br>
+        Local: Rua liz macedo 190
+      </div>
+      <button id="voltarBtn">🔙</button>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("reservaForm");
+    const overlay = document.getElementById("overlayMensagem");
+    const dataSpan = document.getElementById("dataReserva");
+    const horaSpan = document.getElementById("horaReserva");
+    const voltarBtn = document.getElementById("voltarBtn");
+
+    
+    voltarBtn.addEventListener("click", function () {
+      window.location.href = "index.html";
+    });
+
+    
+    overlay.addEventListener("click", function (event) {
+      if (event.target === overlay) {
+        overlay.classList.add("hidden");
+      }
+    });
+
+    
+    form.addEventListener("submit", function (e) {
+      e.preventDefault(); 
+
+      
+      const dataReserva = document.getElementById("data").value;
+      const horaReserva = document.getElementById("hora").value;
+
+      
+      const dataFormatada = new Date(dataReserva).toLocaleDateString('pt-BR');
+
+      
+      dataSpan.textContent = dataFormatada;
+      horaSpan.textContent = horaReserva.slice(0,5); 
+
+      form.reset(); 
+      overlay.classList.remove("hidden"); 
+    });
+  </script>
+</body>
+
+</html>

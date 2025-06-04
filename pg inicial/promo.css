@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+
+header {
+    width: 100%;
+}
+
+.containerheader {
+    width: 100%;
+    background-color: rgba(6, 3, 0, 0.907);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.containerheader .containerLogo {
+    width: 25%;
+}
+
+.containerheader .containerLogo img {
+    width: 90px;
+}
+
+.containerheader .containerMenu {
+    width: 70%;
+}
+
+.containerheader .containerMenu nav {
+    padding: 10px 0;
+}
+
+.containerheader .containerMenu nav a {
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    font-weight: 500px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 15px;
+    text-decoration: none;
+    transition: all 0.5s;
+}
+
+.containerheader .containerMenu nav a:hover {
+    color: rgb(250, 248, 248);
+    font-size: 20px;
+    padding: 10px;
+    margin: 10px;
+    background-color: all rgb(61, 30, 4);
+    border-radius: 16px;
+
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: linear-gradient(rgba(29, 29, 29, 0.8), rgba(29, 29, 29, 0.8)), url('fundo.png');
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titulo {
+    width: 100%;
+    color: #ffc506;
+    text-align: center;
+    padding: 10px;
+}
+
+.linha {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.coluna {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.coluna1 img {
+    width: 500px;
+    
+    border-radius: 10px; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+    transition: 0.3s; /* Efeito de hover */
+}
+img {
+    width: 100%;
+    height: auto;
+    margin: 10px;
+}
+
+.coluna2 img {
+    width: 239px;
+    
+    border-radius: 10px; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+    transition: 0.3s; /* Efeito de hover */
+}
+
+.coluna3 img {
+    width: 783px;
+    
+    border-radius: 10px; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+    transition: 0.3s; /* Efeito de hover */
+}
+
+
+
+.coluna img:hover {
+    transform: scale(1.05); /* Aumenta a imagem ao passar o mouse */
+}
+
