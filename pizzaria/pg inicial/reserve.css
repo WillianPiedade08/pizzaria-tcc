@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: "Roboto", sans-serif;
+
+}
+
+body {
+    background-size: cover;
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: linear-gradient(rgba(29, 29, 29, 0.8), rgba(29, 29, 29, 0.8)), url('back.png');
+}
+
+header {
+    width: 100%;
+}
+
+.containerheader {
+    width: 100%;
+    background-color: rgba(6, 3, 0, 0.907);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.containerheader .containerLogo {
+    width: 25%;
+}
+
+.containerheader .containerLogo img {
+    width: 90px;
+}
+
+.containerheader .containerMenu {
+    width: 70%;
+}
+
+.containerheader .containerMenu nav {
+    padding: 10px 0;
+}
+
+.containerheader .containerMenu nav a {
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    font-weight: 500px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 15px;
+    text-decoration: none;
+    transition: all 0.5s;
+}
+
+.containerheader .containerMenu nav a:hover {
+    color: rgb(250, 248, 248);
+    font-size: 20px;
+    padding: 10px;
+    margin: 10px;
+    background-color: all rgb(61, 30, 4);
+    border-radius: 16px;
+
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-grow: 1; /* Permite que o main ocupe o espaço restante */
+    padding-top: 80px; /* Espaço para não sobrepor o cabeçalho fixo */
+    z-index: 1; /* Para garantir que o formulário fique acima do fundo */
+}
+
+section {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.178), rgba(255, 255, 255, 0.116));
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Largura do formulário */
+    text-align: center; /* Centraliza o texto dentro do formulário */
+}
+
+h2 {
+    color: #d6a608; /* Cor do título */
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    text-align: center; /* Centraliza o texto da label */
+}
+
+
+input[type="text"],
+input[type="fone"],
+input[type="date"],
+input[type="time"],
+input[type="number"] {
+    width: 100%; /* 100% da largura do container */
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #d6a608;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%; /* Largura total do botão */
+}
+
+button:hover {
+    background-color: #ffc506;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}

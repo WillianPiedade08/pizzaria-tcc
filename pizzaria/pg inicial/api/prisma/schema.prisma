@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Cliente {
+  id         Int        @id @default(autoincrement())
+  nome       String
+  email      String     @unique
+  senha      String     
+  enderecos  Endereco[] 
+  pedidos    Pedido[]
+}
+
+model Endereco {
+  id          Int      @id @default(autoincrement())
+  cliente     Cliente  @relation(fields: [clienteId], references: [id])
+  clienteId   Int
+  rua         String
+  numero      String
+  bairro      String
+  cep         String
+  complemento String
+  cidade      String
+}
+
+model Pedido {
+  id          Int           @id @default(autoincrement())
+  cliente     Cliente       @relation(fields: [clienteId], references: [id])
+  clienteId   Int
+  dataPedido  DateTime      @default(now())
+  status      String        
+  total       Float
+
+  itens       ItemPedido[]
+  pagamentoId Int?         
+}
+
+model ItemPedido {
+  id         Int      @id @default(autoincrement())
+  pedido     Pedido   @relation(fields: [pedidoId], references: [id])
+  pedidoId   Int
+  pizza      Pizza    @relation(fields: [pizzaId], references: [id])
+  pizzaId    Int
+  quantidade Int
+  tamanho    String   
+}
+
+model Pizza {
+  id          Int            @id @default(autoincrement())
+  nome        String
+  descricao   String
+  preco       Float         
+  itensPedido ItemPedido[]
+  categoriaPizza   CategoriaPizza? @relation(fields: [categoriaId], references: [id])
+  categoriaId Int?
+  tamanhos    Tamanho[]
+}
+
+model Tamanho {
+  id       Int    @id @default(autoincrement())
+  nome     String 
+  preco    Float
+  pizza    Pizza  @relation(fields: [pizzaId], references: [id])
+  pizzaId  Int
+}
+
+model CategoriaPizza {
+  id     Int     @id @default(autoincrement())
+  nome   String  
+  pizzas Pizza[]
+}
+
+model Pagamento {
+  id        Int     @id @default(autoincrement())
+  pedidoId  Int
+  metodo    String  
+  status    String  
+  valor     Float  
+}
