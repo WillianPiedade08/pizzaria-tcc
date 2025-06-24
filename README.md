@@ -22,3 +22,37 @@
 - [ ] Iniciar a codificação/desenvolvimento **Back-end**
 - [ ] Iniciar a codificação/desenvolvimento **Front-end**
 - [ ] Iniciar a codificação/desenvolvimento **Mobile**
+
+#### Requisitos funcionais 
+[RF001] O sistema deve permitir o CRUD de pedidos de pizza.
+Prioridade: (x) Essencial ( ) Importante ( ) Desejável
+
+[RF001.1] O sistema deve permitir que o cliente escolha sabores, tamanho, borda e forma de pagamento.
+Prioridade: (x) Essencial ( ) Importante ( ) Desejável
+
+[RF001.2] O sistema deve permitir visualizar o status do pedido: Em preparo, Pronto, Em entrega, Finalizado.
+Prioridade: ( ) Essencial (x) Importante ( ) Desejáve
+DCU01
+
+[RF002] O sistema deve permitir o CRUD de estoque de ingredientes.
+Prioridade: (x) Essencial ( ) Importante ( ) Desejável
+
+[RF002.1] O funcionário deve poder atualizar o estoque após uso na produção de pizzas.
+Prioridade: ( ) Essencial (x) Importante ( ) Desejável
+DCU02
+
+[RF003] O sistema deve permitir o CRUD de fornecedores.
+Prioridade: (x) Essencial ( ) Importante ( ) Desejável
+[RF003.1] O gerente deve poder cadastrar novos fornecedores.
+Prioridade: ( ) Essencial (x) Importante ( ) Desejável
+DCU03
+[RF004] O sistema deve permitir o login de funcionários e gerentes.
+Prioridade: (x) Essencial ( ) Importante ( ) Desejável
+
+[RF004.1] O sistema deve validar se o usuário está cadastrado antes de permitir o login.
+Prioridade: (x) Essencial ( ) Importante ( ) Desejável
+DCU04
+
+[RF005] O sistema deve permitir o acompanhamento das entregas, com controle do motoboy.
+Prioridade: (x) Essencial ( ) Importante ( ) Desejável
+DCU05
