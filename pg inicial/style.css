@@ -7,22 +7,42 @@
     font-style: normal;
   }
 
-  :root {
-    --c1: #ffc506;
-    --c2: #5e5252;
-    --c3: #666;
+  /* Variáveis de cores */
+:root {
+    --primary: #e63946;
+    --primary-dark: #c1121f;
+    --secondary: #f1faee;
+    --accent: #a8dadc;
+    --dark: #1d3557;
+    --light: #f8f9fa;
+    --gray: #6c757d;
+    --white: #ffffff;
+    --black: #212529;
 }
-  
 
+/* Reset e estilos base */
 body {
+    font-family: "Itim", cursive, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-size: cover;
-    font-family: "Itim", cursive;
+    background-color: var(--light);
+    color: var(--black);
     margin: 0;
     padding: 0;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 header {
+       position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
+    z-index: 1000;
 }
 
 #carrinho-topo {
@@ -35,7 +55,7 @@ header {
 
 .containerheader {
     width: 100%;
-    background-color: rgba(6, 3, 0, 0.907);
+    background-color: var(--white);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -43,11 +63,11 @@ header {
 }
 
 .containerheader .containerLogo {
-    width: 25%;
+    width: 50%;
 }
 
 .containerheader .containerLogo img {
-    width: 90px;
+    width: 150px;
 }
 
 .containerheader .containerMenu {
@@ -59,9 +79,9 @@ header {
 }
 
 .containerheader .containerMenu nav a {
-    color: rgb(255, 255, 255);
+    color: var(--black);
     font-size: 18px;
-    font-weight: 500px;
+    font-weight: 500;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     margin: 15px;
     text-decoration: none;
@@ -69,18 +89,23 @@ header {
 }
 
 .containerheader .containerMenu nav a:hover {
-    color: rgb(250, 248, 248);
+    color: var(--primary);
     font-size: 20px;
     padding: 10px;
     margin: 10px;
-    background-color: all rgb(61, 30, 4);
+    background-color: var(--accent);
     border-radius: 16px;
+}
 
+.containerheader .containerMenu nav a.active {
+    color: var(--primary);
+    border-bottom: 3px solid var(--primary);
+    font-weight: bold;
 }
 
 .first-section {
     height: 100vh;
-    background-image: linear-gradient(rgba(29, 29, 29, 0.8), rgba(29, 29, 29, 0.8)), url('back.png');
+    background-image: linear-gradient(rgba(63, 63, 63, 0.8), rgba(29, 29, 29, 0.8)), url('pizzzzzzzzzzzzzzzzzzzzzzzzzzz.png');
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -88,26 +113,23 @@ header {
     align-items: center;
 }
 
-.first-section .conteudo-principal {
+.first-section .conteudo-pricipal {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-
 .first-section h1 {
-    color: #ffc506;
+    color: var(--primary);
     font-size: 4rem;
-    text-transform: uppercase;
     margin-bottom: 0.5rem;
     display: flex;
     justify-content: center;
-
 }
 
 .first-section h2 {
-    color: rgb(177, 177, 177);
+    color: var(--gray);
     font-size: 3rem;
     font-weight: 400;
     text-transform: uppercase;
@@ -127,13 +149,13 @@ header {
     height: 60px;
     cursor: pointer;
     text-transform: uppercase;
-    background-color: #ffc506;
+    background-color: var(--primary);
     border-radius: 10px;
-    color: black;
+    color: var(--white);
     font-weight: 700;
     margin: 0 10px;
-    /* Espaçamento horizontal entre botões */
     transition: all 400ms ease-in;
+    border: none;
 }
 
 .btn button a {
@@ -142,9 +164,9 @@ header {
 }
 
 .btn button:hover {
-    border: 1px solid #ffc506;
-    background-color: transparent;
-    color: #ffc506;
+    border: 1px solid var(--primary);
+    background-color: var(--white);
+    color: var(--primary);
 }
 
 main {
@@ -188,15 +210,13 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: rgba(12, 12, 12, 0.8);
+    background-color: var(--dark);
     font-family: roboto;
 }
 
-
-
 .recentes h2 {
     font-size: 5rem;
-    color: #e6e6e6;
+    color: var(--white);
     text-transform: uppercase;
 }
 
@@ -212,7 +232,7 @@ main {
 }
 
 .itens-cardapio .info {
-    background-color: rgb(221, 221, 221);
+    background-color: var(--white);
     border: none;
     display: flex;
     flex-direction: column;
@@ -226,6 +246,7 @@ main {
     text-transform: uppercase;
     margin-bottom: 6rem;
     text-decoration: underline;
+    color: var(--primary);
 }
 
 .itens-cardapio .info h4 {
@@ -241,13 +262,13 @@ main {
 
 .itens-cardapio .info h4 span {
     font-size: 1.6rem;
-    color: #585858;
+    color: var(--primary-dark);
     margin-left: 1.5rem;
     text-decoration: underline;
 }
 
 .itens-cardapio div {
-    background-color: #5e5252;
+    background-color: var(--secondary);
     box-shadow: 0px 0px 4px 1px;
 }
 
@@ -261,36 +282,37 @@ main {
     width: 200px;
     height: 35px;
     margin-top: 0.5rem;
-    background-color: #ffc506;
+    background-color: var(--primary);
     border-radius: 5px;
     text-transform: uppercase;
     cursor: pointer;
-    color: black;
+    color: var(--white);
     transition: all 200ms ease-in;
+    border: none;
 }
 
 .itens-cardapio .info .pedir:hover {
-    background-color: #5e5252;
-    color: white;
+    background-color: var(--primary-dark);
+    color: var(--white);
 }
 
 .contatos {
     width: 100%;
-    background-color: black;
+    background-color: var(--dark);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-size: 1.8rem;
-    color: white;
+    color: var(--white);
     padding-bottom: 4rem;
     font-family: roboto;
-    
 }
 
 .contatos h3 {
     font-size: 4rem;
     margin-bottom: 3rem;
+    color: var(--primary);
 }
 
 .contatos-secao {
@@ -310,26 +332,26 @@ main {
 }
 
 .contatos-secao div:hover {
-    color: #ffc506; /* Amarelo */
+    color: var(--primary);
     cursor: pointer;
 }
 
 .contatos-secao a {
-    text-decoration: none; /* Remove sublinhado */
-    color: white;
+    text-decoration: none;
+    color: var(--white);
 }
 
 .contatos-secao a:hover {
-    color: #ffc506; /* Amarelo */
+    color: var(--primary);
 }
 
 .contatos-secao i {
-    margin-right: 10px; /* Espaço entre ícone e texto */
-    font-size: 2rem; /* Ajuste o tamanho do ícone */
+    margin-right: 10px;
+    font-size: 2rem;
 }
 
 .contatos-secao i:hover {
-    color: #ffc506; /* Amarelo */
+    color: var(--primary);
     cursor: pointer;
 }
 
