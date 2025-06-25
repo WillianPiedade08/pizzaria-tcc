@@ -56,3 +56,27 @@ DCU04
 [RF005] O sistema deve permitir o acompanhamento das entregas, com controle do motoboy.
 Prioridade: (x) Essencial ( ) Importante ( ) Desejável
 DCU05
+
+# Figma 
+## https://www.figma.com/design/zBSEECdubENAktBqzVELJu/Untitled?node-id=121-33&t=tpMZg6hkTRDtTUrx-0
+
+## Diagrama DCU
+![](./docs/dcu.jpeg)
+
+## Diagrama DER
+![](./docs/Der.jpeg)
+
+## Diagrama de Classe
+![](./docs/uml%20DA.jpeg)
+
+## SWOT
+![](./docs/Swot.jpeg)
+
+## CANVAS
+![](./docs/Canvas.jpeg)
+
+## Triângulo de ferro
+![](./docs/Triangulo%20de%20ferro.jpg)
+
+## Diagrama de Atividade
+![](./docs/Diagrama%20de%20Atividade.jpg)
