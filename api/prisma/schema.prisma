@@ -7,89 +7,99 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Atendimento {
+  atendimento_id Int         @id @default(autoincrement())
+  cliente_id     Int
+  funcionario_id Int
+  data           DateTime    @default(now())
+  cliente        Cliente     @relation(fields: [cliente_id], references: [cliente_id])
+  funcionario    Funcionario @relation(fields: [funcionario_id], references: [funcionario_id])
+}
+
 model Cliente {
-  cliente_id    Int           @id @default(autoincrement())
-  nome          String        @db.VarChar(100)
-  telefone      String 
-  endereco      String?       @db.VarChar(100)
-  pedidos       Pedido[]
-  atendimentos  Atendimento[]  // Relação com Funcionário
-}
-
-model Produto {
-  produto_id    Int              @id @default(autoincrement())
-  nome          String           @db.VarChar(100)
-  preco         Decimal          @db.Decimal(10,2)
-  descricao     String           @db.VarChar(255)
-  qtd_estoque   Int
-  itens         Item_Pedido[]       // Relação com Pedido
-  movimentos    MovimentoEstoque[]  // Movimento de estoque
-  entregas      Entrega[]           // Relação com Fornecedor
-}
-
-model Pedido {
-  pedido_id   Int           @id @default(autoincrement())
-  cliente_id  Int
-  data        DateTime      @default(now())
-  sub_total   Decimal       @db.Decimal(10,2)
-  cliente     Cliente       @relation(fields: [cliente_id], references: [cliente_id])
-  itens       Item_Pedido[]
-}
-
-model Item_Pedido {
-  item_id         Int        @id @default(autoincrement())
-  pedido_id       Int
-  produto_id      Int
-  data_venda      DateTime   @default(now())
-  quantidade      Int
-  preco_unitario  Decimal    @db.Decimal(10,2) @default(0)
-  forma_pagamento String     @db.VarChar(100)
-  valor_total     Decimal    @db.Decimal(10,2) @default(0)
-  pedido          Pedido     @relation(fields: [pedido_id], references: [pedido_id])
-  produto         Produto    @relation(fields: [produto_id], references: [produto_id])
-}
-
-model Funcionario {
-  funcionario_id Int           @id @default(autoincrement())
-  nome           String        @db.VarChar(100)
-  cargo          String        @db.VarChar(100)
-  telefone       String        @db.VarChar(255)
-  atendimentos   Atendimento[] // Relação com Cliente
-}
-
-model MovimentoEstoque {
-  estoque_id      Int       @id @default(autoincrement())
-  produto_id      Int
-  tipo            String    @db.VarChar(20) // 'entrada' ou 'saida'
-  quantidade      Int
-  data_movimento  DateTime  @default(now())
-  produto         Produto   @relation(fields: [produto_id], references: [produto_id])
-}
-
-model Fornecedor {
-  fornecedor_id Int        @id @default(autoincrement())
-  nome          String     @db.VarChar(100)
-  telefone      String     @db.VarChar(20)
-  entregas      Entrega[]
+  cliente_id Int       @id @default(autoincrement())
+  nome       String    @db.VarChar(100)
+  endereco   String?   @db.VarChar(100)
+  telefone   String
+  atendimentos Atendimento[]
+  pedidos      Pedido[]
 }
 
 model Entrega {
-  entrega_id     Int         @id @default(autoincrement())
-  fornecedor_id  Int
-  produto_id     Int
-  data_entrega   DateTime    @default(now())
-  quantidade     Int
+  entrega_id    Int        @id @default(autoincrement())
+  fornecedor_id Int
+  produto_id    Int
+  data_entrega  DateTime   @default(now())
+  quantidade    Int
+  fornecedor    Fornecedor @relation(fields: [fornecedor_id], references: [fornecedor_id])
+  produto       Produto    @relation(fields: [produto_id], references: [produto_id])
 
-  fornecedor     Fornecedor  @relation(fields: [fornecedor_id], references: [fornecedor_id])
-  produto        Produto     @relation(fields: [produto_id], references: [produto_id])
+  @@index([fornecedor_id], name: "Entrega_fornecedor_id_fkey")
+  @@index([produto_id], name: "Entrega_produto_id_fkey")
 }
 
-model Atendimento {
-  atendimento_id  Int          @id @default(autoincrement())
-  cliente_id      Int
-  funcionario_id  Int
-  data            DateTime     @default(now())
+model Fornecedor {
+  fornecedor_id Int       @id @default(autoincrement())
+  nome          String    @db.VarChar(100)
+  telefone      String    @db.VarChar(20)
+  entregas      Entrega[]
+}
 
-  cliente         Cliente      @relation(fields: [cliente_id], references: [cliente_id])
-  funcionario     Funcionario  @relation(fields: [funcionario_id], references: [funcionario_id])
+model Funcionario {
+  funcionario_id Int          @id @default(autoincrement())
+  nome           String       @db.VarChar(100)
+  cargo          String       @db.VarChar(100)
+  telefone       String       @db.VarChar(255)
+  atendimentos   Atendimento[]
+  email          String       @unique @db.VarChar(191)
+  senha          String       @db.VarChar(191)
+}
+
+model ItemPedido {
+  item_id         Int      @id @default(autoincrement())
+  pedido_id       Int
+  produto_id      Int
+  data_venda      DateTime @default(now())
+  quantidade      Int
+  preco_unitario  Decimal  @default(0.00) @db.Decimal(10, 2)
+  forma_pagamento String   @db.VarChar(100)
+  valor_total     Decimal  @default(0.00) @db.Decimal(10, 2)
+  pedido          Pedido   @relation(fields: [pedido_id], references: [pedido_id])
+  produto         Produto  @relation(fields: [produto_id], references: [produto_id])
+
+  @@index([pedido_id], name: "ItemPedido_pedido_id_fkey")
+  @@index([produto_id], name: "ItemPedido_produto_id_fkey")
+}
+
+model MovimentoEstoque {
+  estoque_id     Int      @id @default(autoincrement())
+  produto_id     Int
+  tipo           String   @db.VarChar(20)
+  quantidade     Int
+  data_movimento DateTime @default(now())
+  produto        Produto  @relation(fields: [produto_id], references: [produto_id])
+
+  @@index([produto_id], name: "MovimentoEstoque_produto_id_fkey")
+}
+
+model Pedido {
+  pedido_id   Int         @id @default(autoincrement())
+  data        DateTime    @default(now())
+  cliente_id  Int
+  sub_total   Decimal     @db.Decimal(10, 2)
+  itens       ItemPedido[]
+  cliente     Cliente     @relation(fields: [cliente_id], references: [cliente_id])
+
+  @@index([cliente_id], name: "Pedido_cliente_id_fkey")
+}
+
+model Produto {
+  produto_id       Int          @id @default(autoincrement())
+  nome             String       @db.VarChar(100)
+  preco            Decimal      @db.Decimal(10, 2)
+  descricao        String       @db.VarChar(255)
+  qtd_estoque      Int
+  entregas         Entrega[]
+  itens            ItemPedido[]
+  movimentos       MovimentoEstoque[]
 }

@@ -1,4 +1,7 @@
-const express = require('express');
+const express = require('express'); // Importa o Express
+const routes = require('./src/router'); // importa suas rotas
+require('dotenv').config(); // garante que o .env será carregado
+
 const cors = require('cors');
 const app = express();
 
@@ -10,4 +13,6 @@ app.use(router);
 
 app.listen(5000, () => {
   console.log('API executando em http://localhost:5000');
+
+
 });
