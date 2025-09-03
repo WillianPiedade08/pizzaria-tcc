@@ -20,11 +20,11 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 40px;
-    position: fixed;   /* Adicionado */
-    top: 0;            /* Adicionado */
-    left: 0;           /* Adicionado */
-    width: 100%;       /* Adicionado */
-    z-index: 100;      /* Adicionado */
+    position: fixed;   
+    top: 0;            
+    left: 0;           
+    width: 100%;       
+    z-index: 100;      
 }
 
 .containerLogo img {
