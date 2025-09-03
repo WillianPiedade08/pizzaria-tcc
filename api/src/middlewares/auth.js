@@ -1,19 +1,22 @@
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
-function auth(req, res, next) {
-  try {
-    const authHeader = req.headers.authorization || '';
-    // esperado: "Bearer <token>"
-    const [, token] = authHeader.split(' ');
+const secret = "seuSegredoSuperSecreto"; // ideal usar process.env.SECRET
 
-    if (!token) return res.status(401).json({ error: 'Token não enviado' });
+function authMiddleware(req, res, next) {
+    const authHeader = req.headers["authorization"];
+    if (!authHeader) {
+        return res.status(401).json({ error: "Token não fornecido" });
+    }
 
-    const payload = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = payload; // { sub, email, cargo, iat, exp }
-    return next();
-  } catch (e) {
-    return res.status(401).json({ error: 'Token inválido ou expirado' });
-  }
+    const token = authHeader.split(" ")[1]; // pega só o token (Bearer xxx)
+
+    jwt.verify(token, secret, (err, decoded) => {
+        if (err) {
+            return res.status(403).json({ error: "Token inválido" });
+        }
+        req.user = decoded; // salva os dados do cliente no req
+        next();
+    });
 }
 
-module.exports = auth;
+module.exports = { authMiddleware, secret };
