@@ -1,12 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reserva</title>
   <link rel="stylesheet" href="reserva.css">
 </head>
+
 <body>
+
+
+  <header>
+    <div class="containerheader">
+
+      <div class="containerLogo">
+        <img src="../docs/icone.png" alt="Logo da pizzaria">
+      </div>
+
+      <div class="containerMenu">
+
+
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="cardapio.html">Cardápio</a>
+          <a href="delivery.html">Delivery</a>
+          <a href="carrinho.html" title="Ver carrinho"><i class="bi bi-cart3"></i></a>
+
+
+        </nav>
+
+      </div>
+      <div class="header-btn">
+        <a href="delivery.html" class="reserva"><button class="reserva">Peça Aqui</button></a>
+      </div>
+    </div>
+  </header>
+
   <div class="reserva-container">
     <h2>Faça sua Reserva</h2>
     <form id="reservaForm">
@@ -40,7 +70,7 @@
 
   </div>
 
-  
+
   <div id="overlayMensagem" class="overlay hidden">
     <div id="mensagemSucesso" class="mensagem-sucesso">
       <div class="mensagem-titulo">
@@ -62,35 +92,35 @@
     const horaSpan = document.getElementById("horaReserva");
     const voltarBtn = document.getElementById("voltarBtn");
 
-    
+
     voltarBtn.addEventListener("click", function () {
       window.location.href = "index.html";
     });
 
-    
+
     overlay.addEventListener("click", function (event) {
       if (event.target === overlay) {
         overlay.classList.add("hidden");
       }
     });
 
-    
-    form.addEventListener("submit", function (e) {
-      e.preventDefault(); 
 
-      
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+
       const dataReserva = document.getElementById("data").value;
       const horaReserva = document.getElementById("hora").value;
 
-      
+
       const dataFormatada = new Date(dataReserva).toLocaleDateString('pt-BR');
 
-      
-      dataSpan.textContent = dataFormatada;
-      horaSpan.textContent = horaReserva.slice(0,5); 
 
-      form.reset(); 
-      overlay.classList.remove("hidden"); 
+      dataSpan.textContent = dataFormatada;
+      horaSpan.textContent = horaReserva.slice(0, 5);
+
+      form.reset();
+      overlay.classList.remove("hidden");
     });
   </script>
 </body>

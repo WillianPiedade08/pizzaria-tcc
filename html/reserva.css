@@ -1,22 +1,83 @@
-
 :root {
-  --c1: #ffc506; 
-  --c2: #000000; 
-  --c3: #666666; 
+  --c1: #ffc506;
+  --c2: #000000;
+  --c3: #666666;
 }
 
 
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: var(--c2); 
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  background-size: cover;
+  background-color: #fff8f0;
+  background-image: url('../docs/ez.jpg');
+  color: #4e403d2d;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.containerheader {
+  background-color: #241e1e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 40px;
+  position: fixed;    /* Adicionado */
+  top: 0;             /* Adicionado */
+  left: 0;            /* Adicionado */
+  width: 96%;        /* Adicionado */
+  z-index: 10;       /* Adicionado */
+}
+
+.containerLogo img {
+  width: 120px;
+  height: auto;
+  margin-right: 40px;
+}
+
+.containerMenu {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.containerMenu nav a {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: none;
+  margin: 0 25px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.containerMenu nav a:hover,
+.containerMenu nav a.active {
+  color: #000000;
+  background-color: #ffffff;
+}
+
+.header-btn button {
+  background-color: #ff2d2d;
   color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 20px;
+  padding: 12px 32px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.header-btn button:hover {
+  background-color: #fff;
+  color: #ff2d2d;
+  border: 1px solid #ff2d2d;
 }
 
 .reserva-container {
   max-width: 600px;
-  margin: 20px auto;
+  margin: 140px auto;
   padding: 20px;
   background-color: #fff;
   border-radius: 8px;
@@ -42,7 +103,9 @@ label {
   color: var(--c3);
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -80,8 +143,8 @@ button:hover {
 }
 
 .mensagem-sucesso {
-  background-color: var(--c1); 
-  color: var(--c2); 
+  background-color: var(--c1);
+  color: var(--c2);
   padding: 20px;
   border-radius: 8px;
   text-align: center;

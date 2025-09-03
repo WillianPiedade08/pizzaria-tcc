@@ -15,11 +15,16 @@ body {
 }
 
 .containerheader {
-     background-color: #241e1e;
+    background-color: #241e1e;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 40px;
+    position: fixed;   /* Adicionado */
+    top: 0;            /* Adicionado */
+    left: 0;           /* Adicionado */
+    width: 100%;       /* Adicionado */
+    z-index: 100;      /* Adicionado */
 }
 
 .containerLogo img {
