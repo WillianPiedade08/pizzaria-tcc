@@ -1,11 +1,11 @@
 const express = require('express'); // Importa o Express
-const routes = require('./src/router'); // importa suas rotas
+const routes = require('./src/routes'); // importa suas rotas
 require('dotenv').config(); // garante que o .env será carregado
 
 const cors = require('cors');
 const app = express();
 
-const router = require('./src/router');
+const router = require('./src/routes');
 
 app.use(cors());
 app.use(express.json());

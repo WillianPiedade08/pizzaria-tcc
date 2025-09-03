@@ -55,4 +55,8 @@ routes.post('/produtos', Produto.create);
 routes.get('/produtos', Produto.read);
 // ...
 
+const { checkout } = require('./controllers/checkout');
+
+router.post('/checkout', checkout);
+
 module.exports = routes;

@@ -58,6 +58,7 @@ model Funcionario {
 model ItemPedido {
   item_id         Int      @id @default(autoincrement())
   pedido_id       Int
+  nome      String
   produto_id      Int
   data_venda      DateTime @default(now())
   quantidade      Int
