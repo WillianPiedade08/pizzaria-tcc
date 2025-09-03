@@ -22,3 +22,42 @@
 - [ ] Iniciar a codificação/desenvolvimento **Back-end**
 - [ ] Iniciar a codificação/desenvolvimento **Front-end**
 - [ ] Iniciar a codificação/desenvolvimento **Mobile**
+
+# Testes Insomnia
+
+# Cliente
+
+# Get
+
+![](./docs/get%20clientes.png)
+
+# Put
+
+![](./docs/put-clientes.png)
+
+# Post
+
+![](./docs/post-clientes.png)
+
+# Delete
+
+![](./docs/del-cliente.png)
+
+#
+# Pedido
+
+# Get
+
+![](./docs/get-pedidos.png)
+
+# Put
+
+![](./docs/put-pedidos.png)
+
+# Post
+
+![](./docs/post-pedidos.png)
+
+# Delete
+
+![](./docs/del-pedidos.png)
