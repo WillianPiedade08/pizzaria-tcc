@@ -1,8 +1,6 @@
 const API_URL = "http://localhost:5000";
 
-// ============================
-// ADICIONAR AO CARRINHO
-// ============================
+
 const botoesAdicionar = document.querySelectorAll('.btn-adicionar');
 
 botoesAdicionar.forEach(botao => {
@@ -33,9 +31,7 @@ botoesAdicionar.forEach(botao => {
     });
 });
 
-// ============================
-// CADASTRAR CLIENTE
-// ============================
+
 async function cadastrarCliente() {
     try {
         const response = await fetch(`${API_URL}/cliente`, {
@@ -63,9 +59,7 @@ async function cadastrarCliente() {
     }
 }
 
-// ============================
-// FINALIZAR PEDIDO
-// ============================
+
 document.getElementById('finalizarPedido').addEventListener('click', async () => {
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 

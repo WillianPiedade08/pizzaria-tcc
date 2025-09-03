@@ -1,15 +1,15 @@
 const express = require('express');
 const routes = express.Router();
 
-const authMiddleware = require('./middlewares/auth');
-const Auth = require('./controllers/auth');
+const authMiddleware = require('../middlewares/auth');
+const Auth = require('../controllers/auth');
 
-const Cliente = require('./controllers/cliente');
-const Pedido = require('./controllers/pedido');
-const Item = require('./controllers/itemPedido');
-const Funcionario = require('./controllers/funcionario');
-const Estoque = require('./controllers/movimentoEstoque');
-const Produto = require('./controllers/produto');
+const Cliente = require('../controllers/cliente');
+const Pedido = require('../controllers/pedido');
+const Item = require('../controllers/itemPedido');
+const Funcionario = require('../controllers/funcionario');
+const Estoque = require('../controllers/movimentoEstoque');
+const Produto = require('../controllers/produto');
 
 routes.get('/', (req, res) => res.json({ titulo: 'Pizzaria Seu Zé' }));
 
@@ -17,7 +17,6 @@ routes.get('/', (req, res) => res.json({ titulo: 'Pizzaria Seu Zé' }));
 routes.post('/auth/register', Auth.register);
 routes.post('/auth/login', Auth.login);
 
-// Exemplo: proteger tudo abaixo com JWT
 routes.use(authMiddleware);
 
 // Clientes
@@ -41,22 +40,19 @@ routes.get('/itens/:id', Item.readOne);
 routes.put('/itens/:id', Item.update);
 routes.delete('/itens/:id', Item.remove);
 
-// Funcionários (se quiser limitar por cargo, dá pra checar req.user.cargo)
+// Funcionários 
 routes.get('/funcionarios', Funcionario.read);
-// ...
 
 // Estoque
 routes.post('/estoque', Estoque.create);
 routes.get('/estoque', Estoque.read);
-// ...
 
 // Produtos
 routes.post('/produtos', Produto.create);
 routes.get('/produtos', Produto.read);
-// ...
 
-const { checkout } = require('./controllers/checkout');
+const { checkout } = require('../controllers/checkout');
 
-router.post('/checkout', checkout);
+routes.post('/checkout', checkout);
 
 module.exports = routes;

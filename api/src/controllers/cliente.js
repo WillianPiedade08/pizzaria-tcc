@@ -1,4 +1,3 @@
-// src/controllers/cliente.js
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
@@ -58,5 +57,4 @@ async function remove(req, res) {
   }
 }
 
-// 👇 IMPORTANTE: precisa exportar exatamente assim
 module.exports = { create, read, readOne, update, remove };

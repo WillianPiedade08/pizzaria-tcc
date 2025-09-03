@@ -12,18 +12,14 @@ async function checkout(req, res) {
       return res.status(400).json({ error: "Dados incompletos para finalizar pedido" });
     }
 
-    // 1. Criar cliente
     const cliente = await prisma.cliente.create({
       data: { nome, telefone, endereco }
     });
 
-    // 2. Gerar token para o cliente
     const token = jwt.sign({ cliente_id: cliente.cliente_id }, SECRET, { expiresIn: "2h" });
 
-    // 3. Calcular subtotal
     const sub_total = carrinho.reduce((acc, item) => acc + item.preco * item.quantidade, 0);
 
-    // 4. Criar pedido
     const pedido = await prisma.pedido.create({
       data: {
         cliente_id: cliente.cliente_id,

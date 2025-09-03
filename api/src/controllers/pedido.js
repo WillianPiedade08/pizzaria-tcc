@@ -9,7 +9,7 @@ const create = async (req, res) => {
       return res.status(400).json({ error: "cliente_id, sub_total e itens são obrigatórios" });
     }
 
-    // Transação: cria pedido + itens + atualiza estoque
+    
     const pedido = await prisma.$transaction(async (tx) => {
       // cria o pedido
       const novoPedido = await tx.pedido.create({

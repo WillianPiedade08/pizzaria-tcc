@@ -10,7 +10,6 @@ function signToken(payload) {
   });
 }
 
-// POST /auth/register  (cria funcionário/usuário)
 async function register(req, res) {
   try {
     const { nome, cargo, telefone, email, senha } = req.body;
@@ -37,7 +36,6 @@ async function register(req, res) {
   }
 }
 
-// POST /auth/login  (gera token)
 async function login(req, res) {
   try {
     const { email, senha } = req.body;

@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const secret = "seuSegredoSuperSecreto"; // ideal usar process.env.SECRET
+const secret = "seuSegredoSuperSecreto";
 
 function authMiddleware(req, res, next) {
     const authHeader = req.headers["authorization"];
@@ -8,13 +8,13 @@ function authMiddleware(req, res, next) {
         return res.status(401).json({ error: "Token não fornecido" });
     }
 
-    const token = authHeader.split(" ")[1]; // pega só o token (Bearer xxx)
+    const token = authHeader.split(" ")[1]; 
 
     jwt.verify(token, secret, (err, decoded) => {
         if (err) {
             return res.status(403).json({ error: "Token inválido" });
         }
-        req.user = decoded; // salva os dados do cliente no req
+        req.user = decoded; 
         next();
     });
 }
