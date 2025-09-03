@@ -20,7 +20,8 @@ model Cliente {
   cliente_id Int       @id @default(autoincrement())
   nome       String    @db.VarChar(100)
   endereco   String?   @db.VarChar(100)
-  telefone   String
+  senha      String @default("senha123")
+  telefone   String  @unique
   atendimentos Atendimento[]
   pedidos      Pedido[]
 }
