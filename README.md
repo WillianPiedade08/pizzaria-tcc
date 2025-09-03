@@ -61,3 +61,14 @@
 # Delete
 
 ![](./docs/del-pedidos.png)
+
+
+# Token
+
+# Cadastro
+
+![](./docs/gerar-token.png)
+
+# Login
+
+![](./docs/login-token.png)
