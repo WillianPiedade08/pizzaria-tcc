@@ -56,24 +56,6 @@ body {
     background-color: #ffffff;
 }
 
-.header-btn button {
-    background-color: #ff2d2d;
-    color: #fff;
-    font-weight: 700;
-    border: none;
-    border-radius: 20px;
-    padding: 12px 32px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.header-btn button:hover {
-    background-color: #fff;
-    color: #ff2d2d;
-    border: 1px solid #ff2d2d;
-}
-
 .first-section {
     min-height: 100vh;
     background-size: cover;
@@ -90,14 +72,19 @@ body {
     font-size: 4rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 0 #ffd54f, -2px -2px 0 #ffd54f, 2px -2px 0 #ffd54f, -2px 2px 0 #ffd54f; /* contorno amarelo */
 }
 
 .first-section h2 {
-    color: #ffffff;
-    font-size: 2.5rem;
-    font-weight: 400;
-    margin-bottom: 1.5rem;
+    color: #ffd54f;
+    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000; /* contorno preto */
 }
+
+h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 2px;
+}
+
 
 .btn {
     display: flex;

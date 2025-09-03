@@ -21,11 +21,11 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0px 40px;
-  position: fixed;    /* Adicionado */
-  top: 0;             /* Adicionado */
-  left: 0;            /* Adicionado */
-  width: 96%;        /* Adicionado */
-  z-index: 10;       /* Adicionado */
+  position: fixed;    
+  top: 0;             
+  left: 0;            
+  width: 96%;        
+  z-index: 10;       
 }
 
 .containerLogo img {
@@ -55,24 +55,6 @@ body {
 .containerMenu nav a.active {
   color: #000000;
   background-color: #ffffff;
-}
-
-.header-btn button {
-  background-color: #ff2d2d;
-  color: #fff;
-  font-weight: 700;
-  border: none;
-  border-radius: 20px;
-  padding: 12px 32px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.header-btn button:hover {
-  background-color: #fff;
-  color: #ff2d2d;
-  border: 1px solid #ff2d2d;
 }
 
 .reserva-container {
