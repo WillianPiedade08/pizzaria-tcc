@@ -12,7 +12,6 @@ body {
     margin: 0;
 }
 
-/* Header */
 header {
     width: 100%;
     background: #111;
@@ -57,15 +56,15 @@ header {
     color: #111;
 }
 
-/* Cardápio Container */
+
 .container {
     background-color: #111;
-    padding: 48px 40px 40px 40px; /* aumentou o padding */
+    padding: 48px 40px 40px 40px; 
     border-radius: 12px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    max-width: 1200px; /* aumentou o tamanho máximo */
+    max-width: 1200px; 
     margin: 48px auto 0 auto;
-    font-size: 1.18rem; /* aumentou o tamanho da fonte */
+    font-size: 1.18rem;
 }
 
 .container > .containerLogo {
@@ -77,7 +76,7 @@ h1 {
     text-align: center;
     margin-bottom: 36px;
     color: #FFC107;
-    font-size: 3rem; /* aumentou o tamanho do título */
+    font-size: 3rem; 
     letter-spacing: 2px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
@@ -88,11 +87,11 @@ table {
     border-collapse: collapse;
     margin-bottom: 24px;
     background: transparent;
-    font-size: 1.08rem; /* aumentou o tamanho da fonte da tabela */
+    font-size: 1.08rem; 
 }
 
 th, td {
-    padding: 16px 12px; /* aumentou o padding */
+    padding: 16px 12px; 
     text-align: left;
     border-bottom: 1px solid #333;
 }
@@ -136,7 +135,6 @@ td:first-child {
     color: #FFC107;
 }
 
-/* Responsividade */
 @media (max-width: 1000px) {
     .container {
         max-width: 98vw;
@@ -168,5 +166,10 @@ td:first-child {
     }
     .pizza-name {
         font-size: 1rem;
+    }
+
+    table, thead, tbody, th, td, tr {
+        font-size: 0.95rem;
+        display: block;
     }
 }
