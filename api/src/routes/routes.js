@@ -1,14 +1,11 @@
-// src/routes/routes.js
 const express = require('express');
 const routes = express.Router();
 
 // Middlewares
 const { authMiddleware } = require('../middlewares/auth');          // Funcionários
-const { authClienteMiddleware } = require('../middlewares/authCliente'); // Clientes
+const { authClienteMiddleware, register, login } = require('../middlewares/authCliente'); // Clientes
 
 // Controllers
-const AuthFuncionario = require('../controllers/auth');       // Funcionários
-const AuthCliente = require('../middlewares/authCliente');   // Clientes
 const Cliente = require('../controllers/cliente');
 const Pedido = require('../controllers/pedido');
 const Item = require('../controllers/itemPedido');
@@ -21,15 +18,16 @@ const { checkout } = require('../controllers/checkout');
 routes.get('/', (req, res) => res.json({ titulo: 'Pizzaria Seu Zé' }));
 
 // --- Autenticação Funcionário ---
-routes.post('/auth/register', AuthFuncionario.register);
-routes.post('/auth/login', AuthFuncionario.login);
+routes.post('/auth/register', authMiddleware, require('../controllers/auth').register); // Adicionei authMiddleware se necessário
+routes.post('/auth/login', require('../controllers/auth').login);
 
 // --- Autenticação Cliente ---
-routes.post('/clientes/register', AuthCliente.register);
-routes.post('/clientes/login', AuthCliente.login);
+routes.post('/clientes/register', register);
+routes.post('/clientes/login', login);
 
 // --- Rotas protegidas de cliente ---
-routes.get('/clientes/me', authClienteMiddleware, Cliente.readOne); // Dados do cliente logado
+routes.get('/clientes/me', authClienteMiddleware, Cliente.readMe); // Substitui readOne para /clientes/me
+routes.get('/clientes/:id', authClienteMiddleware, Cliente.readOne);
 routes.put('/clientes/me', authClienteMiddleware, Cliente.update);
 routes.delete('/clientes/me', authClienteMiddleware, Cliente.remove);
 
@@ -48,7 +46,7 @@ routes.put('/itens/:id', authClienteMiddleware, Item.update);
 routes.delete('/itens/:id', authClienteMiddleware, Item.remove);
 
 // Checkout
-routes.post('/checkout', authClienteMiddleware, checkout);
+routes.post('/pedidos/checkout', authClienteMiddleware, checkout); // Ajustei para /pedidos/checkout
 
 // --- Rotas protegidas de funcionário ---
 routes.get('/funcionarios', authMiddleware, Funcionario.read);
