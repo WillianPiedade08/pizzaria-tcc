@@ -6,98 +6,108 @@ const create = async (req, res) => {
     const { cliente_id, sub_total, forma_pagamento, itens } = req.body;
 
     if (!cliente_id || !sub_total || !itens || itens.length === 0) {
-      return res.status(400).json({ error: "cliente_id, sub_total e itens são obrigatórios" });
+      return res.status(400).json({ error: 'cliente_id, sub_total e itens são obrigatórios' });
     }
 
-    
+    const cliente = await prisma.cliente.findUnique({ where: { id: Number(cliente_id) } });
+    if (!cliente) return res.status(404).json({ error: 'Cliente não encontrado' });
+
     const pedido = await prisma.$transaction(async (tx) => {
-      // cria o pedido
       const novoPedido = await tx.pedido.create({
         data: {
           cliente_id: Number(cliente_id),
           sub_total: new Prisma.Decimal(String(sub_total)),
-        }
+          forma_pagamento: forma_pagamento || 'Não informado',
+        },
       });
 
-      // cria os itens do pedido
+      let total = new Prisma.Decimal(0);
       for (const it of itens) {
         const quantidade = Number(it.quantidade || 1);
-        const preco = new Prisma.Decimal(String(it.preco_unitario || "0.00"));
+        const produto = await tx.produto.findUnique({ where: { id: Number(it.produto_id) } });
+        if (!produto) throw new Error(`Produto ${it.produto_id} não encontrado`);
+        if (produto.qtd_estoque < quantidade) throw new Error('Estoque insuficiente');
+        const preco = new Prisma.Decimal(String(it.preco_unitario || produto.preco));
         const valorTotal = new Prisma.Decimal((quantidade * parseFloat(preco)).toFixed(2));
 
-        // cria o item
         await tx.itemPedido.create({
           data: {
-            pedido_id: novoPedido.pedido_id,
+            pedido_id: novoPedido.id,
             produto_id: Number(it.produto_id),
             quantidade,
             preco_unitario: preco,
             valor_total: valorTotal,
-            forma_pagamento: forma_pagamento || "Não informado"
-          }
+            forma_pagamento: forma_pagamento || 'Não informado',
+          },
         });
 
-        // atualiza estoque
         await tx.produto.update({
-          where: { produto_id: Number(it.produto_id) },
-          data: { qtd_estoque: { decrement: quantidade } }
+          where: { id: Number(it.produto_id) },
+          data: { qtd_estoque: { decrement: quantidade } },
         });
+
+        total = total.plus(valorTotal);
       }
 
-      return await tx.pedido.findUnique({
-        where: { pedido_id: novoPedido.pedido_id },
-        include: { itens: true, cliente: true }
+      return await tx.pedido.update({
+        where: { id: novoPedido.id },
+        data: { sub_total: total },
+        include: { itens: true, cliente: true },
       });
     });
 
     return res.status(201).json(pedido);
   } catch (error) {
-    console.error("Erro ao criar pedido:", error);
+    console.error('Erro ao criar pedido:', error);
     return res.status(400).json({ error: error.message });
   }
 };
 
+// Adicionando a função read que estava faltando
 const read = async (req, res) => {
   try {
     const pedidos = await prisma.pedido.findMany({
-      include: { cliente: true, itens: true }
+      include: { cliente: true, itens: true },
     });
     return res.json(pedidos);
   } catch (error) {
-    return res.status(400).json({ error: error.message });
+    return res.status(500).json({ error: 'Erro ao listar pedidos: ' + error.message });
   }
 };
 
 const readOne = async (req, res) => {
   try {
     const pedido = await prisma.pedido.findUnique({
-      where: { pedido_id: Number(req.params.id) },
-      include: { cliente: true, itens: true }
+      where: { id: Number(req.params.id) }, // Ajuste para 'pedido_id' se for o campo correto
+      include: { cliente: true, itens: true },
     });
+    if (!pedido) return res.status(404).json({ error: 'Pedido não encontrado' });
     return res.json(pedido);
   } catch (error) {
-    return res.status(400).json({ error: error.message });
+    return res.status(500).json({ error: 'Erro ao buscar pedido: ' + error.message });
   }
 };
 
 const update = async (req, res) => {
   try {
     const pedido = await prisma.pedido.update({
-      where: { pedido_id: Number(req.params.id) },
-      data: req.body
+      where: { id: Number(req.params.id) }, // Ajuste para 'pedido_id' se necessário
+      data: req.body,
     });
-    return res.status(202).json(pedido);
+    return res.status(200).json(pedido);
   } catch (error) {
-    return res.status(400).json({ error: error.message });
+    if (error.code === 'P2025') return res.status(404).json({ error: 'Pedido não encontrado' });
+    return res.status(500).json({ error: 'Erro ao atualizar pedido: ' + error.message });
   }
 };
 
 const remove = async (req, res) => {
   try {
-    await prisma.pedido.delete({ where: { pedido_id: Number(req.params.id) } });
+    await prisma.pedido.delete({ where: { id: Number(req.params.id) } }); // Ajuste para 'pedido_id'
     return res.status(204).send();
   } catch (error) {
-    return res.status(404).json({ error: error.message });
+    if (error.code === 'P2025') return res.status(404).json({ error: 'Pedido não encontrado' });
+    return res.status(500).json({ error: 'Erro ao remover pedido: ' + error.message });
   }
 };
 

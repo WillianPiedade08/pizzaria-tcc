@@ -7,7 +7,7 @@ const { authClienteMiddleware, register, login } = require('../middlewares/authC
 
 // Controllers
 const Cliente = require('../controllers/cliente');
-const Pedido = require('../controllers/pedido');
+const Pedido = require('../controllers/pedido')
 const Item = require('../controllers/itemPedido');
 const Funcionario = require('../controllers/funcionario');
 const Estoque = require('../controllers/movimentoEstoque');

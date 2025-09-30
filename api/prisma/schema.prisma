@@ -54,3 +54,11 @@ model ItemPedido {
   quantidade Int
   preco     Float
 }
+
+model Funcionario {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  telefone  String   @unique
+  email     String   @unique
+  senha     String
+}
