@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-const secret = process.env.SECRET || 'seuSegredoSuperSecreto'; // Verifique esta linha
+const secret = process.env.JWT_SECRET || '10072007';
 console.log('Secret configurado:', secret); // Log da chave secreta
 
 function authMiddleware(req, res, next) {

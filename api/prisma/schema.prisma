@@ -22,7 +22,9 @@ model Produto {
   id          Int      @id @default(autoincrement())
   nome        String
   preco       Float
-  itensPedido ItemPedido[]
+  descricao   String?
+  qtd_estoque Int
+  itens       ItemPedido[]
 }
 
 model Reserva {
@@ -36,23 +38,24 @@ model Reserva {
 }
 
 model Pedido {
-  id          Int           @id @default(autoincrement())
-  clienteId   Int
-  cliente     Cliente       @relation(fields: [clienteId], references: [id])
-  itens       ItemPedido[]
-  total       Float
-  statusPagamento String    @default("Pendente")
-  data        DateTime      @default(now())
+  id            Int           @id @default(autoincrement())
+  clienteId     Int
+  cliente       Cliente       @relation(fields: [clienteId], references: [id])
+  itens         ItemPedido[]
+  total         Float
+  statusPagamento String      @default("Pendente")
+  data          DateTime      @default(now())
 }
 
 model ItemPedido {
-  id        Int      @id @default(autoincrement())
-  pedidoId  Int
-  pedido    Pedido   @relation(fields: [pedidoId], references: [id])
-  produtoId Int
-  produto   Produto  @relation(fields: [produtoId], references: [id])
-  quantidade Int
-  preco     Float
+  id           Int      @id @default(autoincrement())
+  pedidoId     Int
+  pedido       Pedido   @relation(fields: [pedidoId], references: [id], onDelete: Cascade)
+  produtoId    Int
+  produto      Produto  @relation(fields: [produtoId], references: [id])
+  quantidade   Int
+  precoUnitario Float
+  valor_total  Float
 }
 
 model Funcionario {
@@ -61,4 +64,5 @@ model Funcionario {
   telefone  String   @unique
   email     String   @unique
   senha     String
+  cargo     String   @default("Desconhecido")
 }

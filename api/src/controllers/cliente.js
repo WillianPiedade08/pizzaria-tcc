@@ -67,18 +67,15 @@ async function readOne(req, res) {
   }
 }
 
-// Nova função para /clientes/me
 async function readMe(req, res) {
   try {
     const clienteId = req.user.cliente_id; // Pega do token JWT
     const cliente = await prisma.cliente.findUnique({
       where: { id: clienteId },
     });
-
     if (!cliente) {
       return res.status(404).json({ error: 'Cliente não encontrado' });
     }
-
     const { senha, ...clienteSemSenha } = cliente;
     res.json(clienteSemSenha);
   } catch (err) {
