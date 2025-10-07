@@ -1,28 +1,23 @@
 ## Backlog do Projeto final
-#### Sprint inicial
-- [x] Escolher a metodologia **SCRUM, KANBAN, XP, outras**
-- [x] Definir **Papéis e responsabilidades**
-- [x] Apresentar a proposta inicial
-#### Sprint atual
-- [x] Modelar o negócio no **[Canvas](https://wellifabio.github.io/canvas/)**
-- [x] Criar um cronograma **[Gráfico Gant](https://wellifabio.github.io/gantt/)**
-- [x] Criar um repositório no **github** com o nome do projeto ou tcc-nomeprojeto e adicionar os integrantes do grupo como colaboradores.
-    - Acrescentar um README.md com **link** para todas as **entregas**
-    - Poderá criar outros repositórios separados para back-end, front-end, mobile, etc porém todos os links devem estar no README do repositório principal
-    - Todo o documental do projeto, diagramas, wireframes e documento do projeto ABNT devem estar em uma pasta chamada **./docs**
-- [x] **Protótipo** funcional inicial (Com Figma - Mobile e Web))
-    - [ ] Web
-    - [x] Mobile
-- [ ] Elencar os **[requisitos funcionais como neste exemplo](./requisitos.md)**.
-- [x] Modelar o banco de dados MER x DER Modelo conceitual
-- [x] Cadastrar os integrantes do grupo nas ferramentas de gestão de projeto escolhida Trello, Jira, Asana, etc.
-#### Próxima Sprint
-- [ ] [DC (Diagrama de Classes)](https://github.com/wellifabio/senai2024/tree/main/ds/3des/03-rms/aula03) Back-End
-- [ ] Iniciar a codificação/desenvolvimento **Banco de dados**
-- [ ] Iniciar a codificação/desenvolvimento **Back-end**
-- [ ] Iniciar a codificação/desenvolvimento **Front-end**
-- [ ] Iniciar a codificação/desenvolvimento **Mobile**
+## (Sprint 05 - 06/10) Backlog
+Nesta sprint, vamos focar na implantação do projeto, garantindo que tudo esteja funcionando corretamente em um ambiente de produção. Também faremos uma revisão final do código e documentação.
 
+[] Implantação do Back-End em um serviço de nuvem (ex: Vercel, Heroku, AWS).
+[] Implantação do Front-End em um serviço de nuvem (ex: Vercel, GitHub Pages).
+[] Iniciar o desenvolvimento do App Mobile (Funcionalidades principais).
+[] Testes de integração e ponto a ponto (Caixa preta e Caixa branca).
+[] Após o back-end implantado, Criar um Roteiro/check-list e testar manualmente (Teste de integração: Back/BD) a API a partir do Insomnia e documentar os testes. Tirando prints e fazendo um relatório. (Caixa branca).
+[] Após o front-end implantado, Criar um Roteiro/check-list para testar o Front-End manualmente (Teste ponto a ponto), fazer um relatório dos testes. (Caixa branca).
+[] Criar um Roteiro/check-list (teste de integração) pedir para um colega de outro grupo testar a API implantada a partir do Insomnia e documentar os testes. Tirando prints e fazendo um relatório. (Caixa preta).
+[] Criar um Roteiro/check-list (Teste ponto a ponto) pedir para um colega de outro grupo testar manualmente o Front-End implantado e fazer um relatório dos testes. (Caixa preta).
+[] Adicionar um recurso de IoT (opcional, pois dependendo do tema pode não fazer sentido).
+[] Revisão do cronograma do projeto.
+[] Revisão da documentação.
+[] Matriz SWOT.
+[] DER atualizado ou UML Diagrama de Classes.
+[] Requisitos Funcionais e Não Funcionais.
+[] UML DCU (Diagrama de Caso de Uso).
+[] Para implantação cada stack (front-end, back-end e mobile) foi necessário criar um repositório separado para cada um no GitHub, deixar link dos repositórios no README.md do repositório principal do projeto, com todas as documentações em PDF.
 # Documentação
 
 ## DCU
@@ -55,7 +50,7 @@ RF07 - Autenticação: O sistema deve autenticar clientes via login com token JW
 
 RF08 - Integração: O frontend deve se comunicar com o backend via API REST.
 
-##Requisitos Não Funcionais
+## Requisitos Não Funcionais
 
 RNF01 - Desempenho: O sistema deve responder a requisições em até 2 segundos.
 
