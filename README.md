@@ -1,3 +1,6 @@
+## GANT
+
+![](./docs/gant.atualizado.png)
 
 ## DCU
 
