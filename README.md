@@ -40,6 +40,7 @@
 ## Requisitos funcionais
 
 RF01 - Gerenciamento de Clientes: O sistema deve permitir cadastrar, editar, listar e excluir clientes (nome, email, telefone, endereço, senha).
+
 RF02 - Gerenciamento de Produtos: O sistema deve permitir cadastrar, editar, listar e excluir produtos (nome, preço, imagem).
 RF03 - Gerenciamento de Pedidos: O sistema deve permitir criar pedidos, listar e excluir, associando itens a clientes.
 RF04 - Gerenciamento de Itens: O sistema deve permitir adicionar itens a pedidos (quantidade, preço unitário).
