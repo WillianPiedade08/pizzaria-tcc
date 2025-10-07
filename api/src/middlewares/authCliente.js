@@ -3,10 +3,8 @@ const bcrypt = require('bcrypt');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-// Segredo para JWT de clientes (deve vir de .env)
-const secret = process.env.CLIENTE_SECRET || process.env.JWT_SECRET || 'fallback_segredo'; // Fallback temporário
+const secret = process.env.CLIENTE_SECRET || process.env.JWT_SECRET || 'fallback_segredo'; 
 
-// Middleware para rotas protegidas de cliente
 function authClienteMiddleware(req, res, next) {
     const authHeader = req.headers['authorization'];
     if (!authHeader) return res.status(401).json({ error: 'Token não fornecido' });
@@ -16,22 +14,19 @@ function authClienteMiddleware(req, res, next) {
 
     jwt.verify(token, secret, (err, decoded) => {
         if (err) return res.status(403).json({ error: 'Token inválido' });
-        req.user = decoded; // Salva dados do cliente no req
+        req.user = decoded; 
         next();
     });
 }
 
-// Função para registrar cliente
 async function register(req, res) {
     try {
-        const { nome, telefone, endereco, senha, email } = req.body; // Adicionei email como opcional
+        const { nome, telefone, endereco, senha, email } = req.body; 
 
-        // Validação básica
         if (!nome || !telefone || !senha) {
             return res.status(400).json({ error: 'Nome, telefone e senha são obrigatórios' });
         }
 
-        // Criptografa a senha
         const hashedPassword = await bcrypt.hash(senha, 10);
 
         const cliente = await prisma.cliente.create({
@@ -40,18 +35,15 @@ async function register(req, res) {
                 telefone,
                 endereco,
                 senha: hashedPassword,
-                email: email || null, // Opcional, ajuste se email for obrigatório
+                email: email || null,
             },
         });
 
-        // Gera token
         const token = jwt.sign(
-            { cliente_id: cliente.id, nome: cliente.nome }, // Corrigido para cliente.id
-            secret,
+            { cliente_id: cliente.id, nome: cliente.nome }, 
             { expiresIn: '7d' }
         );
 
-        // Remove senha da resposta
         const { senha: _, ...clienteSemSenha } = cliente;
 
         res.status(201).json({ cliente: clienteSemSenha, token });
@@ -63,7 +55,6 @@ async function register(req, res) {
     }
 }
 
-// Função para login do cliente
 async function login(req, res) {
     try {
         const { telefone, senha } = req.body;
@@ -81,14 +72,12 @@ async function login(req, res) {
         const senhaValida = await bcrypt.compare(senha, cliente.senha);
         if (!senhaValida) return res.status(401).json({ error: 'Senha inválida' });
 
-        // Gera token
         const token = jwt.sign(
-            { cliente_id: cliente.id, nome: cliente.nome }, // Corrigido para cliente.id
+            { cliente_id: cliente.id, nome: cliente.nome }, 
             secret,
             { expiresIn: '7d' }
         );
 
-        // Remove senha da resposta
         const { senha: _, ...clienteSemSenha } = cliente;
 
         res.json({ cliente: clienteSemSenha, token });

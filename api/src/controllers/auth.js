@@ -67,4 +67,4 @@ async function login(req, res) {
   }
 }
 
-module.exports = { register, login }; // Exporta ambas as funções
+module.exports = { register, login }; 

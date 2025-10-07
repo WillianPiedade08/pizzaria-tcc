@@ -9,10 +9,8 @@ botoesAdicionar.forEach(botao => {
         const preco = parseFloat(botao.dataset.preco);
         const imagem = botao.dataset.imagem;
 
-        // Pega carrinho do localStorage
         let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-        // Verifica se já existe
         const produtoExistente = carrinho.find(p => p.nome === nome);
         if (produtoExistente) {
             produtoExistente.quantidade += 1;
@@ -25,7 +23,6 @@ botoesAdicionar.forEach(botao => {
             });
         }
 
-        // Salva no localStorage
         localStorage.setItem('carrinho', JSON.stringify(carrinho));
         alert(`${nome} adicionado ao carrinho!`);
     });

@@ -3,7 +3,7 @@ const prisma = new PrismaClient();
 const bcrypt = require('bcrypt');
 
 async function main() {
-    const senhaHash = await bcrypt.hash('senha123', 10); // Gera hash para senha123
+    const senhaHash = await bcrypt.hash('senha123', 10);
     await prisma.funcionario.create({
         data: {
             nome: 'Maria Funcionária',

@@ -4,7 +4,7 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 const secret = process.env.JWT_SECRET || '10072007';
-console.log('Secret configurado:', secret); // Log da chave secreta
+console.log('Secret configurado:', secret);
 
 function authMiddleware(req, res, next) {
     const authHeader = req.headers['authorization'];
@@ -21,10 +21,10 @@ function authMiddleware(req, res, next) {
 
     jwt.verify(token, secret, (err, decoded) => {
         if (err) {
-            console.log('Erro de verificação:', err.name, err.message); // Log detalhado do erro
+            console.log('Erro de verificação:', err.name, err.message);
             return res.status(403).json({ error: err.name === 'TokenExpiredError' ? 'Token expirado' : 'Token inválido' });
         }
-        console.log('Token decodificado:', decoded); // Log do payload
+        console.log('Token decodificado:', decoded);
         req.user = decoded;
         next();
     });
@@ -33,19 +33,19 @@ function authMiddleware(req, res, next) {
 async function login(req, res) {
     try {
         const { email, senha } = req.body;
-        console.log('Requisição de login recebida:', { email, senha }); // Log da requisição
+        console.log('Requisição de login recebida:', { email, senha }); 
         if (!email || !senha) {
             return res.status(400).json({ error: 'Email e senha são obrigatórios' });
         }
 
         const funcionario = await prisma.funcionario.findUnique({ where: { email } });
-        console.log('Funcionário encontrado:', funcionario); // Log do funcionário
+        console.log('Funcionário encontrado:', funcionario); 
         if (!funcionario) {
             return res.status(401).json({ error: 'Credenciais inválidas' });
         }
 
         const senhaValida = await bcrypt.compare(senha, funcionario.senha);
-        console.log('Senha válida:', senhaValida); // Log da validação
+        console.log('Senha válida:', senhaValida); 
         if (!senhaValida) {
             return res.status(401).json({ error: 'Credenciais inválidas' });
         }
@@ -55,11 +55,11 @@ async function login(req, res) {
             secret,
             { expiresIn: '7d' }
         );
-        console.log('Token gerado:', token); // Log do token
+        console.log('Token gerado:', token); 
         const { senha: _, ...funcionarioSemSenha } = funcionario;
         res.json({ funcionario: funcionarioSemSenha, token });
     } catch (err) {
-        console.log('Erro no login:', err.message); // Log de erros
+        console.log('Erro no login:', err.message); 
         res.status(500).json({ error: 'Erro ao fazer login: ' + err.message });
     }
 }

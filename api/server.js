@@ -6,15 +6,12 @@ const routes = require('./src/routes/routes');
 
 const app = express();
 
-// Middleware
-app.use(cors()); // Ajuste o origin se necessário
+app.use(cors()); 
 app.use(express.json());
 
-// Rotas
 app.use(routes);
 
-// Inicia o servidor
-const PORT = process.env.PORT || 5000; // Usa PORT do .env ou 5000 como fallback
+const PORT = process.env.PORT || 5000; 
 app.listen(PORT, () => {
   console.log(`API executando em http://localhost:${PORT}`);
 });

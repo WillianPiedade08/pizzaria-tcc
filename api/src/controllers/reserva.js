@@ -8,10 +8,8 @@ async function create(req, res) {
       return res.status(400).json({ error: 'clienteId, data, hora e pessoas são obrigatórios' });
     }
 
-    // Converte data e hora para formato ISO-8601
     const dateTime = new Date(`${data}T${hora}:00.000Z`).toISOString();
 
-    // Validações adicionais
     const parsedClienteId = Number(clienteId);
     const parsedPessoas = Number(pessoas);
     if (isNaN(parsedClienteId) || isNaN(parsedPessoas)) {
@@ -21,7 +19,6 @@ async function create(req, res) {
       return res.status(400).json({ error: 'pessoas deve ser maior que zero' });
     }
 
-    // Valida existência do cliente
     const cliente = await prisma.cliente.findUnique({ where: { id: parsedClienteId } });
     if (!cliente) {
       return res.status(404).json({ error: 'Cliente não encontrado' });

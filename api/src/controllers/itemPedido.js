@@ -104,7 +104,7 @@ async function update(req, res) {
       dataToUpdate.precoUnitario = parsedPrecoUnitario;
     }
 
-    // Calcula valor_total usando os valores do item existente ou os novos, se fornecidos
+    
     const quantidadeUtilizada = dataToUpdate.quantidade !== undefined ? dataToUpdate.quantidade : itemExistente.quantidade;
     const precoUnitarioUtilizado = dataToUpdate.precoUnitario !== undefined ? dataToUpdate.precoUnitario : itemExistente.precoUnitario;
     const valor_total = quantidadeUtilizada * precoUnitarioUtilizado;

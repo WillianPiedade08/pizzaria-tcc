@@ -31,7 +31,7 @@ async function read(req, res) {
 async function readOne(req, res) {
   try {
     const produto = await prisma.produto.findUnique({
-      where: { id: Number(req.params.id) }, // Ajuste para 'id' se for o padrão do Prisma
+      where: { id: Number(req.params.id) }, 
     });
     if (!produto) return res.status(404).json({ error: 'Produto não encontrado' });
     res.json(produto);
@@ -47,7 +47,7 @@ async function update(req, res) {
       where: { id: Number(req.params.id) },
       data: { nome, preco, descricao, qtd_estoque },
     });
-    res.status(200).json(produto); // 202 para aceito, 200 para concluído
+    res.status(200).json(produto);
   } catch (error) {
     if (error.code === 'P2025') return res.status(404).json({ error: 'Produto não encontrado' });
     res.status(500).json({ error: 'Erro ao atualizar produto: ' + error.message });

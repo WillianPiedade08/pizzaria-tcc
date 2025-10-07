@@ -2,7 +2,7 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const jwt = require('jsonwebtoken');
 
-const SECRET = "segredo_super_secreto"; // 🔒 coloque no .env
+const SECRET = "segredo_super_secreto"; 
 
 async function checkout(req, res) {
   try {

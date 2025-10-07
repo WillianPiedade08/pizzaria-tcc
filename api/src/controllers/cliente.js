@@ -10,13 +10,11 @@ async function create(req, res) {
       return res.status(400).json({ error: 'nome, email, telefone e senha são obrigatórios' });
     }
 
-    // Validação básica de email (opcional)
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return res.status(400).json({ error: 'Email inválido' });
     }
 
-    // Verifica se telefone ou email já existe
     const existingCliente = await prisma.cliente.findFirst({
       where: { OR: [{ telefone }, { email }] },
     });
@@ -30,7 +28,7 @@ async function create(req, res) {
       data: { nome, email, telefone, endereco, senha: hashedSenha },
     });
 
-    // Remove senha da resposta
+    
     const { senha: _, ...clienteSemSenha } = cliente;
     res.status(201).json(clienteSemSenha);
   } catch (err) {
@@ -41,7 +39,7 @@ async function create(req, res) {
 async function read(req, res) {
   try {
     const clientes = await prisma.cliente.findMany();
-    // Remove senha de todos os clientes
+    
     const clientesSemSenha = clientes.map(({ senha, ...cliente }) => cliente);
     res.json(clientesSemSenha);
   } catch (err) {
@@ -69,7 +67,7 @@ async function readOne(req, res) {
 
 async function readMe(req, res) {
   try {
-    const clienteId = req.user.cliente_id; // Pega do token JWT
+    const clienteId = req.user.cliente_id; 
     const cliente = await prisma.cliente.findUnique({
       where: { id: clienteId },
     });
