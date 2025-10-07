@@ -1,38 +1,39 @@
-const { PrismaClient } = require('@prisma/client');
-const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
+const bcrypt = require('bcrypt');
+const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-function signToken(payload) {
-  return jwt.sign(payload, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN || '1d',
-  });
-}
+const secret = process.env.JWT_SECRET || '10072007';
+console.log('Secret configurado (controller):', secret);
 
 async function register(req, res) {
   try {
-    const { nome, cargo, telefone, email, senha } = req.body;
-
-    if (!nome || !email || !senha) {
-      return res.status(400).json({ error: 'nome, email e senha são obrigatórios' });
+    const { nome, email, senha, telefone } = req.body;
+    if (!nome || !email || !senha || !telefone) {
+      return res.status(400).json({ error: 'Nome, email, senha e telefone são obrigatórios' });
     }
 
-    const jaExiste = await prisma.funcionario.findUnique({ where: { email } });
-    if (jaExiste) {
-      return res.status(409).json({ error: 'E-mail já cadastrado' });
-    }
+    const hashedPassword = await bcrypt.hash(senha, 10);
 
-    const hash = await bcrypt.hash(senha, 10);
-
-    const user = await prisma.funcionario.create({
-      data: { nome, cargo: cargo || 'Atendente', telefone: telefone || '', email, senha: hash },
-      select: { funcionario_id: true, nome: true, email: true, cargo: true },
+    const funcionario = await prisma.funcionario.create({
+      data: {
+        nome,
+        email,
+        senha: hashedPassword,
+        telefone,
+      }
     });
 
-    return res.status(201).json(user);
-  } catch (e) {
-    return res.status(400).json({ error: e.message });
+    const token = jwt.sign(
+      { funcionario_id: funcionario.id, nome: funcionario.nome },
+      secret,
+      { expiresIn: '7d' }
+    );
+
+    const { senha: _, ...funcionarioSemSenha } = funcionario;
+    res.json({ funcionario: funcionarioSemSenha, token });
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao registrar: ' + err.message });
   }
 }
 
@@ -40,28 +41,30 @@ async function login(req, res) {
   try {
     const { email, senha } = req.body;
     if (!email || !senha) {
-      return res.status(400).json({ error: 'email e senha são obrigatórios' });
+      return res.status(400).json({ error: 'Email e senha são obrigatórios' });
     }
 
-    const user = await prisma.funcionario.findUnique({ where: { email } });
-    if (!user) return res.status(401).json({ error: 'Credenciais inválidas' });
+    const funcionario = await prisma.funcionario.findUnique({ where: { email } });
+    if (!funcionario) {
+      return res.status(401).json({ error: 'Credenciais inválidas' });
+    }
 
-    const ok = await bcrypt.compare(senha, user.senha);
-    if (!ok) return res.status(401).json({ error: 'Credenciais inválidas' });
+    const senhaValida = await bcrypt.compare(senha, funcionario.senha);
+    if (!senhaValida) {
+      return res.status(401).json({ error: 'Credenciais inválidas' });
+    }
 
-    const token = signToken({
-      sub: user.funcionario_id,
-      email: user.email,
-      cargo: user.cargo,
-    });
+    const token = jwt.sign(
+      { funcionario_id: funcionario.id, nome: funcionario.nome },
+      secret,
+      { expiresIn: '7d' }
+    );
 
-    return res.json({
-      token,
-      user: { id: user.funcionario_id, nome: user.nome, email: user.email, cargo: user.cargo },
-    });
-  } catch (e) {
-    return res.status(400).json({ error: e.message });
+    const { senha: _, ...funcionarioSemSenha } = funcionario;
+    res.json({ funcionario: funcionarioSemSenha, token });
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao fazer login: ' + err.message });
   }
 }
 
-module.exports = { register, login };
+module.exports = { register, login }; // Exporta ambas as funções
