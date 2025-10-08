@@ -1,3 +1,6 @@
+## Documentação
+- [Relatório de Testes](relatorio_testes.pdf)
+
 ## GANT
 
 ![](./docs/gant.atualizado.png)
