@@ -1,6 +1,11 @@
 ## Documentação
 - [Relatório de Testes](relatorio_testes.pdf)
 
+- [Relatório caixa branca](testes_CaixaBranca.pdf)
+
+- [Relatório caixa preta](caixapreta.pdf)
+
+
 ## GANT
 
 ![](./docs/gant.atualizado.png)
