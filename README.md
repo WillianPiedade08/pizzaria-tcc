@@ -3,7 +3,7 @@
 
 - [Relatório caixa branca](testes_CaixaBranca.pdf)
 
-- [Relatório caixa branca](caixaPreta.pdf)
+- [Relatório caixa preta](caixaPreta.pdf)
 
 
 ## GANT
