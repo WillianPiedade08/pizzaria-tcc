@@ -1,7 +1,7 @@
 ## Documentação
 - [Relatório caixa branca (back)](relatorio_testes.pdf)
 
-- [Relatório caixa preta (back)](Relatorio_caixaPreta.pdf)
+- [Relatório caixa preta (back)](Relatório_caixaPreta.pdf)
 
 - [Relatório caixa branca (front)](testes_CaixaBranca.pdf)
 
