@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-const secret = process.env.CLIENTE_SECRET || process.env.JWT_SECRET || 'fallback_segredo'; 
+const secret = process.env.JWT_SECRET || 'fallback_segredo'; 
 
 function authClienteMiddleware(req, res, next) {
     const authHeader = req.headers['authorization'];
@@ -40,7 +40,8 @@ async function register(req, res) {
         });
 
         const token = jwt.sign(
-            { cliente_id: cliente.id, nome: cliente.nome }, 
+            { cliente_id: cliente.id, nome: cliente.nome },
+            secret,
             { expiresIn: '7d' }
         );
 
