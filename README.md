@@ -1,3 +1,17 @@
+# Documentação
+
+## Front-end
+- [Relatório caixa branca (front)](relatorio_testes.pdf)
+
+- [Relatório caixa preta (front)](Relatório_caixaPreta.pdf)
+
+## Back-end
+
+- [Relatório caixa branca (back)](testes_CaixaBranca.pdf)
+
+- [Relatório caixa preta (back)](caixaPreta.pdf)
+
+
 ## GANT
 
 ![](./docs/gant.atualizado.png)
