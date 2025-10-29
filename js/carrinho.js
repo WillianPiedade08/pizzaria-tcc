@@ -180,7 +180,7 @@
         });
 
         localStorage.removeItem('carrinho');
-        window.location.href = 'index.html'; 
+        window.location.href = '/index.html'; 
       }
     });
 
