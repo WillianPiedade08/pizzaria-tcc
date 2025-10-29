@@ -1,68 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
+model cliente {
+  nome     String
+  endereco String
+  telefone String   @unique(map: "Cliente_telefone_key")
+  senha    String
+  email    String   @unique(map: "Cliente_email_key")
+  id       Int      @id @default(autoincrement())
+  pedido   pedido[]
+  reserva  reserva?
 }
 
-model Cliente {
-  id        Int      @id @default(autoincrement())
-  nome      String
-  email     String   @unique
-  telefone  String   @unique
-  endereco  String
-  senha     String
-  pedidos   Pedido[]
-  reservas  Reserva[]
+model funcionario {
+  id       Int    @id @default(autoincrement())
+  nome     String
+  telefone String @unique(map: "Funcionario_telefone_key")
+  senha    String
+  email    String @unique(map: "Funcionario_email_key")
+  cargo    String @default("Desconhecido")
 }
 
-model Produto {
-  id          Int      @id @default(autoincrement())
+model itempedido {
+  quantidade    Int
+  id            Int     @id @default(autoincrement())
+  pedidoId      Int
+  produtoId     Int
+  valor_total   Float
+  precoUnitario Float
+  pedido        pedido  @relation(fields: [pedidoId], references: [id], onDelete: Cascade, map: "ItemPedido_pedidoId_fkey")
+  produto       produto @relation(fields: [produtoId], references: [id], map: "ItemPedido_produtoId_fkey")
+
+  @@index([pedidoId], map: "ItemPedido_pedidoId_fkey")
+  @@index([produtoId], map: "ItemPedido_produtoId_fkey")
+}
+
+model pedido {
+  data            DateTime     @default(now())
+  clienteId       Int
+  id              Int          @id @default(autoincrement())
+  statusPagamento String       @default("Pendente")
+  total           Decimal      @db.Decimal(10, 2)
+  cep             String?      @db.VarChar(9)
+  itempedido      itempedido[]
+  cliente         cliente      @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+
+  @@index([clienteId], map: "pedido_clienteId_fkey")
+}
+
+model produto {
   nome        String
   preco       Float
+  id          Int          @id @default(autoincrement())
   descricao   String?
   qtd_estoque Int
-  itens       ItemPedido[]
+  itempedido  itempedido[]
 }
 
-model Reserva {
+model reserva {
   id        Int      @id @default(autoincrement())
-  clienteId Int      @unique
-  cliente   Cliente  @relation(fields: [clienteId], references: [id])
+  clienteId Int      @unique(map: "Reserva_clienteId_key")
   data      DateTime
   hora      String
   pessoas   Int
   status    String   @default("Pendente")
-}
-
-model Pedido {
-  id            Int           @id @default(autoincrement())
-  clienteId     Int
-  cliente       Cliente       @relation(fields: [clienteId], references: [id])
-  itens         ItemPedido[]
-  total         Float
-  statusPagamento String      @default("Pendente")
-  data          DateTime      @default(now())
-}
-
-model ItemPedido {
-  id           Int      @id @default(autoincrement())
-  pedidoId     Int
-  pedido       Pedido   @relation(fields: [pedidoId], references: [id], onDelete: Cascade)
-  produtoId    Int
-  produto      Produto  @relation(fields: [produtoId], references: [id])
-  quantidade   Int
-  precoUnitario Float
-  valor_total  Float
-}
-
-model Funcionario {
-  id        Int      @id @default(autoincrement())
-  nome      String
-  telefone  String   @unique
-  email     String   @unique
-  senha     String
-  cargo     String   @default("Desconhecido")
+  cliente   cliente  @relation(fields: [clienteId], references: [id], map: "Reserva_clienteId_fkey")
 }

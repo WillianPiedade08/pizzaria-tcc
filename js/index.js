@@ -1,10 +1,8 @@
-// clientes.js
-
 const form = document.getElementById('clienteForm');
 const tableBody = document.querySelector('#clientesTable tbody');
 
 async function fetchClientes() {
-  const res = await fetch('/clientes'); // Ajuste a rota conforme seu backend
+  const res = await fetch('/clientes'); 
   const clientes = await res.json();
   tableBody.innerHTML = '';
   clientes.forEach(cliente => {
@@ -42,9 +40,8 @@ async function excluirCliente(id) {
 }
 
 function editarCliente(id) {
-  // Aqui você pode implementar a lógica para editar (ex: abrir modal ou preencher o formulário)
+
   alert('Função editar ainda não implementada');
 }
 
-// Inicializa a lista ao carregar a página
 fetchClientes();

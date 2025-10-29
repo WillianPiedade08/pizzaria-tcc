@@ -28,11 +28,11 @@ routes.get('/clientes/:id', authClienteMiddleware, Cliente.readOne);
 routes.put('/clientes/:id', authClienteMiddleware, Cliente.update);
 routes.delete('/clientes/:id', authClienteMiddleware, Cliente.remove);
 
-routes.post('/pedidos', authClienteMiddleware, Pedido.create);
-routes.get('/pedidos', authClienteMiddleware, Pedido.read);
-routes.get('/pedidos/:id', authClienteMiddleware, Pedido.readOne);
-routes.put('/pedidos/:id', authClienteMiddleware, Pedido.update);
-routes.delete('/pedidos/:id', authClienteMiddleware, Pedido.remove);
+routes.post('/pedidos', Pedido.create);
+routes.get('/pedidos', Pedido.read);
+routes.get('/pedidos/:id', Pedido.readOne);
+routes.put('/pedidos/:id', Pedido.update);
+routes.delete('/pedidos/:id', Pedido.remove);
 
 routes.post('/itens', authClienteMiddleware, Item.create);
 routes.get('/itens', authClienteMiddleware, Item.read);
@@ -60,10 +60,24 @@ routes.get('/produtos/:id', authMiddleware, Produto.readOne);
 routes.put('/produtos/:id', authMiddleware, Produto.update);
 routes.delete('/produtos/:id', authMiddleware, Produto.remove);
 
-routes.post('/reservas', authClienteMiddleware, Reserva.create);
-routes.get('/reservas', authClienteMiddleware, Reserva.read);
-routes.get('/reservas/:id', authClienteMiddleware, Reserva.readOne);
-routes.put('/reservas/:id', authClienteMiddleware, Reserva.update);
-routes.delete('/reservas/:id', authClienteMiddleware, Reserva.remove);
+routes.post('/reservas', Reserva.create);
+routes.get('/reservas', Reserva.read);
+routes.get('/reservas/:id', Reserva.readOne);
+routes.put('/reservas/:id', Reserva.update);
+routes.delete('/reservas/:id', Reserva.remove);
+
+routes.get('/teste-db', async (req, res) => {
+  try {
+    const clientes = await prisma.cliente.findMany();
+    res.json(clientes);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Erro ao conectar com o banco' });
+  }
+});
+
 
 module.exports = routes;
+
+
+

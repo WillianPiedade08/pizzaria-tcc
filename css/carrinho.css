@@ -182,7 +182,7 @@ h1, h2, h3 {
     color: #ffd54f;
 }
 
-/* Responsividade */
+
 @media (max-width: 900px) {
     .containerheader {
         flex-direction: column;
