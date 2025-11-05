@@ -1,4 +1,17 @@
-    const carrinhoContainer = document.getElementById('carrinho-container');
+fetch('https://back-pizzaria-deployed.vercel.app/pedidos')
+  .then(response => {
+    if (!response.ok) throw new Error(`Erro na requisição: ${response.status}`);
+    return response.json();
+  })
+  .then(data => {
+    localStorage.setItem('produtos', JSON.stringify(data));
+    console.log('Produtos carregados do back:', data);
+  })
+  .catch(err => {
+    console.error('Falha ao buscar produtos no back:', err);
+  });
+  
+  const carrinhoContainer = document.getElementById('carrinho-container');
     const totalSpan = document.getElementById('total');
     const btnEnviar = document.getElementById('enviar-pedido');
     const dadosPagamento = document.getElementById('dados-pagamento');
@@ -50,7 +63,6 @@
         let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
         const novaQtd = parseInt(e.target.value, 10);
 
-        
         if (index >= 0 && index < carrinho.length) {
           if (isNaN(novaQtd) || novaQtd <= 0) {
             
@@ -90,7 +102,6 @@
           <input type="text" id="cpfBoleto" placeholder="CPF" required>
         `;
       } else if (forma === 'Cartão de Débito') {
-        
         dadosPagamento.innerHTML = `
           <input type="text" id="nomeDebito" placeholder="Nome completo" required>
           <input type="email" id="emailDebito" placeholder="E-mail" required>
