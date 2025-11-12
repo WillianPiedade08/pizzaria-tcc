@@ -1,8 +1,10 @@
+const URL_API = "https://back-pizzaria-deployed.vercel.app";
+
 const form = document.getElementById('clienteForm');
 const tableBody = document.querySelector('#clientesTable tbody');
 
 async function fetchClientes() {
-  const res = await fetch('/clientes'); 
+  const res = await fetch(`${API_URL}/clientes`); 
   const clientes = await res.json();
   tableBody.innerHTML = '';
   clientes.forEach(cliente => {
@@ -24,7 +26,7 @@ form.addEventListener('submit', async (e) => {
   const nome = document.getElementById('nome').value;
   const email = document.getElementById('email').value;
 
-  await fetch('/clientes/register', {
+  await fetch(`${API_URL}/clientes/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ nome, email })
@@ -35,7 +37,7 @@ form.addEventListener('submit', async (e) => {
 });
 
 async function excluirCliente(id) {
-  await fetch(`/clientes/${id}`, { method: 'DELETE' });
+  await fetch(`${API_URL}/clientes/${id}`, { method: 'DELETE' });
   fetchClientes();
 }
 

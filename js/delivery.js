@@ -1,6 +1,5 @@
 const API_URL = "https://back-pizzaria-deployed.vercel.app";
 
-
 const botoesAdicionar = document.querySelectorAll('.btn-adicionar');
 
 botoesAdicionar.forEach(botao => {
@@ -83,6 +82,7 @@ document.getElementById('finalizarPedido').addEventListener('click', async () =>
                 "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({
+                
                 cliente_id: Number(cliente_id),
                 sub_total
             })
