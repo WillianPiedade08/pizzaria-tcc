@@ -20,11 +20,11 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 40px;
-    position: fixed;   
-    top: 0;            
-    left: 0;           
-    width: 100%;       
-    z-index: 100;      
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
 }
 
 .containerLogo img {
@@ -72,15 +72,19 @@ body {
     font-size: 4rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    text-shadow: 2px 2px 0 #ffd54f, -2px -2px 0 #ffd54f, 2px -2px 0 #ffd54f, -2px 2px 0 #ffd54f; /* contorno amarelo */
+    text-shadow: 2px 2px 0 #ffd54f, -2px -2px 0 #ffd54f, 2px -2px 0 #ffd54f, -2px 2px 0 #ffd54f;
+    /* contorno amarelo */
 }
 
 .first-section h2 {
     color: #ffd54f;
-    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000; /* contorno preto */
+    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+    /* contorno preto */
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     font-family: 'Montserrat', sans-serif;
     letter-spacing: 2px;
 }
@@ -122,6 +126,31 @@ h1, h2, h3 {
     color: #a93226;
     font-size: 2.5rem;
     margin-bottom: 2rem;
+}
+
+.itens-cardapio {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.itens-cardapio .info {
+    width: 100%;
+    max-width: 900px;
+    margin-bottom: 0;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+
+.itens-cardapio .info img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    margin-bottom: 12px;
 }
 
 .itens-cardapio .info {

@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000";
+const API_URL = "https://back-pizzaria-deployed.vercel.app";
 
 
 const botoesAdicionar = document.querySelectorAll('.btn-adicionar');

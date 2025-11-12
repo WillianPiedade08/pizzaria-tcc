@@ -1,5 +1,3 @@
-
-
 const switchCtn = document.querySelector("#switch-cnt");
 const switchC1 = document.querySelector("#switch-c1");
 const switchC2 = document.querySelector("#switch-c2");
